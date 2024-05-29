@@ -1,11 +1,15 @@
+// EXTERNAL MODULES
 import { Router } from 'express';
+
+// INTERNAL MODULES
+import invoiceController from '../controller/invoice.controller.js';
+import catchHandlerController from '../libraries/catchController.handler.js';
+
 
 const invoiceRouter = Router();
 
 invoiceRouter
-  .get('/', (req, res) => {
-    res.json({ok: "voici les données"})
-  })
+  .get('/', catchHandlerController(invoiceController.index))
   .post('/', (req, res) => {
     res.json({ok: "merci pour les données"})
   })

@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:structure": "wsl psql -U shopifou -d shopifou -h 192.168.2.102 -f app/data/create_tables.sql;",
+    "db:seeding": "wsl psql -U shopifou -d shopifou -h 192.168.2.102 -f app/data/seeding.sql;"
   },
   "keywords": [],
   "author": "",

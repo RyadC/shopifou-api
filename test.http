@@ -1,0 +1,26 @@
+@url=http://localhost:{{$dotenv PORT}}
+
+### GET /invoice 
+GET {{url}}/invoice
+
+### POST /invoice
+POST {{url}}/invoice
+content-type: application/json
+
+{
+  "reference": "INV_0001",
+  "total_value": 41.25,
+  "customer_id": 2,
+  "order_id": 3
+} 
+
+### PATCH /invoice/:id
+PATCH {{url}}/invoice/4
+content-type: application/json
+
+{
+  "total_value": 18.62
+} 
+
+### DELETE /invoice/:id
+DELETE {{url}}/invoice/4

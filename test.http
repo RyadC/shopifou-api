@@ -1,4 +1,4 @@
-@url=http://localhost:{{$dotenv PORT}}
+@url=http://{{$dotenv PG_HOST}}:{{$dotenv PORT}}
 
 ### GET /invoice 
 GET {{url}}/invoice

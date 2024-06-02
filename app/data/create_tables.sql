@@ -1,13 +1,13 @@
 BEGIN;
 
 
-DROP TABLE IF EXISTS "customer";
-DROP TABLE IF EXISTS "order";
-DROP TABLE IF EXISTS "invoice";
-DROP TABLE IF EXISTS "article";
-DROP TABLE IF EXISTS "category";
-DROP TABLE IF EXISTS "order_has_article";
-DROP TABLE IF EXISTS "article_has_category";
+DROP TABLE IF EXISTS "customer" CASCADE;
+DROP TABLE IF EXISTS "order" CASCADE;
+DROP TABLE IF EXISTS "invoice" CASCADE;
+DROP TABLE IF EXISTS "article" CASCADE;
+DROP TABLE IF EXISTS "category" CASCADE;
+DROP TABLE IF EXISTS "order_has_article" CASCADE;
+DROP TABLE IF EXISTS "article_has_category" CASCADE;
 
 
 CREATE TABLE "customer"
@@ -27,7 +27,7 @@ CREATE TABLE "order"
   "reference"             TEXT NOT NULL UNIQUE,
   "date"                  TIMESTAMPTZ DEFAULT now(),
   "value"                 NUMERIC NOT NULL,
-  "customer_id"           INTEGER REFERENCES "customer"("customer_id"),
+  "customer_id"           INTEGER NOT NULL REFERENCES "customer"("customer_id"),
   "created_at"            TIMESTAMPTZ NOT NULL DEFAULT now(),
   "updated_at"            TIMESTAMPTZ
 );
@@ -38,8 +38,8 @@ CREATE TABLE "invoice"
   "reference"             TEXT NOT NULL UNIQUE,
   "date"                  TIMESTAMPTZ DEFAULT now(),
   "total_value"           NUMERIC NOT NULL,
-  "customer_id"           INTEGER REFERENCES "customer"("customer_id"),
-  "order_id"              INTEGER REFERENCES "order"("order_id"),
+  "customer_id"           INTEGER NOT NULL REFERENCES "customer"("customer_id"),
+  "order_id"              INTEGER NOT NULL REFERENCES "order"("order_id"),
   "created_at"            TIMESTAMPTZ NOT NULL DEFAULT now(),
   "updated_at"            TIMESTAMPTZ
 );
@@ -66,8 +66,8 @@ CREATE TABLE "category"
 CREATE TABLE "order_has_article"
 (
   "item_id"               INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "order_id"              INTEGER REFERENCES "order"("order_id"),
-  "article_id"            INTEGER REFERENCES "article"("article_id"),
+  "order_id"              INTEGER NOT NULL REFERENCES "order"("order_id"),
+  "article_id"            INTEGER NOT NULL REFERENCES "article"("article_id"),
   "quantity"              INTEGER NOT NULL CHECK("quantity" > 0),
   "created_at"            TIMESTAMPTZ NOT NULL DEFAULT now(),
   "updated_at"            TIMESTAMPTZ,
@@ -78,8 +78,8 @@ CREATE TABLE "order_has_article"
 CREATE TABLE "article_has_category"
 (
   "item_id"             INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "article_id"          INTEGER REFERENCES "article"("article_id"),
-  "category_id"         INTEGER REFERENCES "category"("category_id"),
+  "article_id"          INTEGER NOT NULL REFERENCES "article"("article_id"),
+  "category_id"         INTEGER NOT NULL REFERENCES "category"("category_id"),
   "created_at"            TIMESTAMPTZ NOT NULL DEFAULT now(),
   "updated_at"            TIMESTAMPTZ,
 

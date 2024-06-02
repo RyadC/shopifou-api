@@ -1,13 +1,24 @@
 import pg from 'pg';
 
-const client = new pg.Client(process.env.PG_URL);
+const client = new pg.Pool({
+  connectionString: process.env.PG_URL
+});
 
-// try {
-  const connection = await client.connect();
-  // console.log('connection', connection);
+
+// async function connectionClient() {
+//   try {
+//     return await pool.connect();
+    
+//   } catch (error) {
+//     console.log(error);
+//   }
   
-// } catch (error) {
-  // console.log('error', error);
 // }
 
+(async () => {
+  await client.connect();
+})()
+
+// const client = (async () => await connectionClient())();
+// console.log(client);
 export default client;

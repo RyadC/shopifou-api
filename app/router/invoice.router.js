@@ -9,16 +9,11 @@ import catchHandlerController from '../libraries/catchController.handler.js';
 const invoiceRouter = Router();
 
 invoiceRouter
+  // TODO : Add the validation schema
   .get('/', catchHandlerController(invoiceController.index))
-  .post('/', (req, res) => {
-    res.json({ok: "merci pour les données"})
-  })
-  .patch('/:id', (req, res) => {
-    res.json({ok: "c'est bon j'ai modifié les données"})
-  })
-  .delete('/:id', (req, res) => {
-    res.json({ok: "c'est bon j'ai tout supprimé"})
-  })
-
+  .post('/', invoiceController.store)
+  // -> On donne le contexte à la fonction pour récupérer la variable RADIX_PARSEINT à travers le this
+  .patch('/:id(\\d+)', invoiceController.update.bind(invoiceController))
+  .delete('/:id(\\d+)', invoiceController.destroy.bind(invoiceController));
 
 export default invoiceRouter;

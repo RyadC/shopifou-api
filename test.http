@@ -1,4 +1,4 @@
-@url=http://{{$dotenv PG_HOST}}:{{$dotenv PORT}}
+@url=http://{{$dotenv HOST}}:{{$dotenv PORT}}
 
 ### GET /invoice 
 GET {{url}}/invoice
@@ -9,13 +9,13 @@ content-type: application/json
 
 {
   "reference": "INV_0001",
-  "total_value": 41.25,
+  "total_value": 6.04,
   "customer_id": 2,
-  "order_id": 3
+  "order_id": 4
 } 
 
 ### PATCH /invoice/:id
-PATCH {{url}}/invoice/4
+PATCH {{url}}/invoice/5
 content-type: application/json
 
 {

@@ -7,12 +7,11 @@ const invoiceController = {
   async index(req, res) {
     const invoices = await invoiceDatamapper.getAll();
 
-    res.status(200).json(invoices);
+    res.status(200).json({data: invoices});
   },
 
   async store(req, res) {
     const data = req.body;
-
     const storedInvoice = await invoiceDatamapper.create(data);
 
     res.status(201).json({data: storedInvoice});
@@ -20,7 +19,6 @@ const invoiceController = {
 
   async update(req, res) {
     const { total_value } = req.body;
-    console.log(this);
     const id = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
 
     const updatedInvoices = await invoiceDatamapper.update(id, total_value);
@@ -30,7 +28,6 @@ const invoiceController = {
 
   async destroy(req, res) {
     const id = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
-
     const deletedInvoice = await invoiceDatamapper.delete(id);
 
     res.status(204).json({});

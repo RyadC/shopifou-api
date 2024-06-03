@@ -12,6 +12,16 @@ export default [
       } 
     }
   },
+  {
+    "overrides": [
+      {
+        "files": ["tests/**/*"],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
+  },
   js.configs.recommended,
   pluginJs.configs.recommended,
 ];

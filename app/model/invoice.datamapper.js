@@ -8,6 +8,15 @@ const invoiceDatamapper = {
     return result.rows;
   },
 
+  async getOne(id) {
+    const result = await client.query(`
+    SELECT * FROM "invoice"
+      WHERE "invoice_id" = $1
+    ;`, [id]);
+
+    return result.rows;
+  },
+
   async create(data) {
     const { reference, total_value, customer_id, order_id } = data;
 
@@ -27,7 +36,7 @@ const invoiceDatamapper = {
       UPDATE "invoice"
         SET 
           "total_value" = $1,
-          updated_at = now()
+          "updated_at" = now()
         WHERE invoice_id = $2
       RETURNING *
       ;

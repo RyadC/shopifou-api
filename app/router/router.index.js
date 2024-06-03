@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
 })
 
 router.use('/invoice', invoiceRouter);
+// router.use('/order', orderRouter);
 
 // -> Handler error middleware
 router.use((error, req, res, next) => {
@@ -19,11 +20,22 @@ router.use((error, req, res, next) => {
   // console.log(error);
   console.log(status, name, message);
 
-
-  if(name === "ValidationError") {
-    status = 404;
-    message = 'Bad request. Invalid value.'
+  switch (name) {
+    case "ValidationError":
+      status = 404;
+      message = 'Bad request. Invalid value.'
+    break;
+      
+    case "BadRequest":
+      status = 404;
+    break;
+        
+    default:
+      status = 404;
+      message = 'Bad request. Invalid value.'
+    break;
   }
+
 
   res.status(status).json({error: message});
 

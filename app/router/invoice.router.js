@@ -9,15 +9,19 @@ import invoiceStoreSchema from '../schema/invoice/invoice.store.schema.js';
 import invoiceIndexSchema from '../schema/invoice/invoice.index.schema.js';
 import invoiceUpdateSchema from '../schema/invoice/invoice.update.schema.js';
 import invoiceDestroySchema from '../schema/invoice/invoice.destroy.schema.js';
+import invoiceShowSchema from '../schema/invoice/invoice.show.schema.js';
 
 
 const invoiceRouter = Router();
 
-invoiceRouter
-  .get('/', validationSchema(invoiceIndexSchema, 'params'), catchHandlerController(invoiceController.index))
-  .post('/', validationSchema(invoiceStoreSchema, 'body'), invoiceController.store)
-  // -> On donne le contexte à la fonction pour récupérer la variable RADIX_PARSEINT à travers le this
-  .patch('/:id(\\d+)', validationSchema(invoiceUpdateSchema, 'body'), invoiceController.update.bind(invoiceController))
-  .delete('/:id(\\d+)', validationSchema(invoiceDestroySchema, 'params'), invoiceController.destroy.bind(invoiceController));
+invoiceRouter.route('/')
+  .get(validationSchema(invoiceIndexSchema, ['params']), catchHandlerController(invoiceController.index))
+  .post(validationSchema(invoiceStoreSchema, ['body']), invoiceController.store);
+  
+invoiceRouter.route('/:id(\\d+)')
+// -> On donne le contexte à la fonction pour récupérer la propriété RADIX_PARSEINT à travers le this de la méthode
+  .get(validationSchema(invoiceShowSchema, ['params']), invoiceController.show.bind(invoiceController))
+  .patch(validationSchema(invoiceUpdateSchema, ['body','params']), invoiceController.update.bind(invoiceController))
+  .delete(validationSchema(invoiceDestroySchema, ['params']), invoiceController.destroy.bind(invoiceController));
 
 export default invoiceRouter;

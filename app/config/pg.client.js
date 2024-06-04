@@ -1,3 +1,4 @@
+// EXTERNAL MODULES
 import pg from 'pg';
 
 const client = new pg.Pool({

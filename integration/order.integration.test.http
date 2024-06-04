@@ -1,0 +1,28 @@
+@url=http://{{$dotenv HOST}}:{{$dotenv PORT}}
+
+### GET /order 
+GET {{url}}/order
+ 
+### POST /order
+POST {{url}}/order
+content-type: application/json
+
+{
+  "reference": "OR_0005",
+  "value": 50.48,
+  "customer_id": 10
+} 
+
+### GET /order/:id
+GET {{url}}/order/1
+
+### PATCH /order/:id
+PATCH {{url}}/order/1
+content-type: application/json
+
+{
+  "value": 45
+} 
+
+### DELETE /order/:id
+DELETE {{url}}/order/5

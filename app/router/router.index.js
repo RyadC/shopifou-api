@@ -3,6 +3,7 @@ import { Router } from 'express';
 
 // INTERNAL MODULES
 import invoiceRouter from './invoice.router.js';
+import orderRouter from './order.router.js';
 
 
 const router = Router();
@@ -12,7 +13,7 @@ router.get('/', (req, res) => {
 })
 
 router.use('/invoice', invoiceRouter);
-// router.use('/order', orderRouter);
+router.use('/order', orderRouter);
 
 // -> Handler error middleware
 router.use((error, req, res, next) => {

@@ -37,7 +37,7 @@ const invoiceDatamapper = {
         SET 
           "total_value" = $1,
           "updated_at" = now()
-        WHERE invoice_id = $2
+        WHERE "invoice_id" = $2
       RETURNING *
       ;
     `, [totalValue, id]);

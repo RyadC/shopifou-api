@@ -1,5 +1,6 @@
 // EXTERNAL MODULES
-import expressJSDocSwagger from ('express-jsdoc-swagger');
+import expressJSDocSwagger from 'express-jsdoc-swagger';
+import path from 'node:path';
 
 const options = {
   info: {
@@ -17,17 +18,18 @@ const options = {
   //   },
   // },
   // Base directory which we use to locate your JSDOC files
-  baseDir: import.meta.__dirname,
+  // baseDir: path.join(import.meta.dirname, '/app'),
+  baseDir: import.meta.dirname,
   // Glob pattern to find your jsdoc files (multiple patterns can be added in an array)
   filesPattern: '../../**/*.js',
   // URL where SwaggerUI will be rendered
-  swaggerUIPath: process.env.API_DOCUMENTATION_ENDPOINT || '/api-docs',
+  swaggerUIPath: '/api-docs',
   // Expose OpenAPI UI
   exposeSwaggerUI: true,
   // Expose Open API JSON Docs documentation in `apiDocsPath` path.
   exposeApiDocs: false,
   // Open API JSON Docs endpoint.
-  apiDocsPath: '/v3/api-docs',
+  // apiDocsPath: '/v3/api-docs',
   // Set non-required fields as nullable by default
   notRequiredAsNullable: false,
   // You can customize your UI options.
@@ -38,6 +40,6 @@ const options = {
   // multiple: true,
 };
 
-const apiDocumentation = (app) => expressJSDocSwagger(app)(options);
+export default (app) => expressJSDocSwagger(app)(options);
 
-export default apiDocumentation;	
+// export default apiDocumentation;

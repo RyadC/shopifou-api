@@ -1,5 +1,5 @@
 // INTERNAL MODULES
-import invoiceDatamapper from "../model/invoice.datamapper.js";
+import invoiceDatamapper from "../../model/invoice.datamapper.js";
 
 const invoiceController = {
   RADIX_PARSEINT: 10,

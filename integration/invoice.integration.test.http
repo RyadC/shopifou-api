@@ -1,4 +1,4 @@
-@url=http://{{$dotenv HOST}}:{{$dotenv PORT}}
+@url=http://{{$dotenv HOST}}:{{$dotenv PORT}}/api
 
 ### GET /invoice 
 GET {{url}}/invoice

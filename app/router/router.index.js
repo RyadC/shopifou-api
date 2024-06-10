@@ -2,18 +2,17 @@
 import { Router } from 'express';
 
 // INTERNAL MODULES
-import invoiceRouter from './invoice.router.js';
-import orderRouter from './order.router.js';
+import apiRouter from './api/api.router.js';
+import websiteRouter from './website/website.router.js';
 
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  res.send('on root site');
-})
+router.use('/', websiteRouter);
+router.use('/api', apiRouter);
 
-router.use('/invoice', invoiceRouter);
-router.use('/order', orderRouter);
+
+
 
 // -> Handler error middleware
 router.use((error, req, res, next) => {

@@ -1,4 +1,4 @@
-@url=http://{{$dotenv HOST}}:{{$dotenv PORT}}
+@url=http://{{$dotenv HOST}}:{{$dotenv PORT}}/api
 
 ### GET /order 
 GET {{url}}/order
@@ -26,3 +26,10 @@ content-type: application/json
 
 ### DELETE /order/:id
 DELETE {{url}}/order/5
+
+
+### GET /order/article/:id
+GET {{url}}/order/article/2
+
+### GET /order/customer/:id
+GET {{url}}/order/customer/2

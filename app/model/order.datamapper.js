@@ -8,6 +8,27 @@ const orderDatamapper = {
     return result.rows; 
   },
 
+  async getAllByArticle(articleId) {
+    const result = await client.query(`
+      SELECT * FROM "order"
+        JOIN "order_has_article" 
+          ON "order"."order_id" = "order_has_article"."order_id" 
+        WHERE "article_id" = $1
+      ;
+      `, [articleId])
+
+    return result.rows;
+    },
+
+  async getAllByCustomer(customerId) {
+    const result = await client.query(`
+      SELECT * FROM "order"
+        WHERE "customer_id" = $1
+      ;
+      `, [customerId])
+    return result.rows;
+  },
+
   async getOne(id) {
     const result = await client.query(`
     SELECT * FROM "order"

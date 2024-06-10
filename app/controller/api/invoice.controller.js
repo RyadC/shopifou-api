@@ -17,6 +17,23 @@ const invoiceController = {
     res.status(200).json({data: invoice});
   },
 
+  async showCustomer(req, res) {
+    const customerId = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
+
+    // const customer = await customerDatamapper.getOne(id);
+    const customer = [1];
+
+    if(customer.length === 0) {
+      const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
+      requestError.name = 'BadRequest';
+      return next(requestError);
+    }
+
+    const invoice = await invoiceDatamapper.getAllByCustomer(customerId);
+
+    res.status(200).json({data: invoice});
+  },
+
   async store(req, res) {
     const data = req.body;
     const storedInvoice = await invoiceDatamapper.create(data);

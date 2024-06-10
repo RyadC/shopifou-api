@@ -10,6 +10,7 @@ import invoiceIndexSchema from '../../schema/invoice/invoice.index.schema.js';
 import invoiceUpdateSchema from '../../schema/invoice/invoice.update.schema.js';
 import invoiceDestroySchema from '../../schema/invoice/invoice.destroy.schema.js';
 import invoiceShowSchema from '../../schema/invoice/invoice.show.schema.js';
+import invoiceShowCustomerSchema from '../../schema/invoice/invoice.showCustomer.schema.js';
 
 
 const invoiceRouter = Router();
@@ -70,5 +71,17 @@ invoiceRouter.route('/:id(\\d+)')
      * @return {ApiError} 404 - Invoice not found - application/json
   */
   .delete(validationSchema(invoiceDestroySchema, ['params']), invoiceController.destroy.bind(invoiceController));
+
+invoiceRouter.route('/customer/:id(\\d+)')
+   /**
+    * GET /api/invoice/customer/{id}
+    * @summary Get an invoice by customer
+    * @tags Invoice
+    * @param {number} id.path.requied - customer ID to have their invoices
+    * @return {[GetInvoiceByCustomer]} 200 - Success request - application/json
+    * @return {ApiError} 400 - Bad request - application/json
+    * @return {ApiError} 404 - Customer not found - application/json
+    */
+   .get(validationSchema(invoiceShowCustomerSchema, ['params']), catchHandlerController(invoiceController.showCustomer.bind(invoiceController)))
 
 export default invoiceRouter;

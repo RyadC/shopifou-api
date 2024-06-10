@@ -27,3 +27,6 @@ content-type: application/json
 
 ### DELETE /invoice/:id
 DELETE {{url}}/invoice/16
+
+### GET /invoice/customer/:id
+GET {{url}}/invoice/customer/2

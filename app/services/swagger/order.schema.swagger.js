@@ -77,7 +77,7 @@
  * A returned Order from get all by article
  * @typedef {object} GetOrderByCustomer
  * @property {number} order_id - order ID
- * @property {string} reference - reference order
+ * @property {string} reference - order reference
  * @property {string} date - order date created in DB
  * @property {number} value - order value
  * @property {number} customer_id - customer ID in relation with the order

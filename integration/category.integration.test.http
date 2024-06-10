@@ -1,0 +1,30 @@
+@url=http://{{$dotenv HOST}}:{{$dotenv PORT}}/api
+
+### GET /category 
+GET {{url}}/category
+
+### POST /category
+POST {{url}}/category
+content-type: application/json
+
+{
+  "name": "jouets pour enfants"
+} 
+
+### GET /category/:id
+GET {{url}}/category/2
+GET {{url}}/category/3
+
+### PATCH /category/:id
+PATCH {{url}}/category/3
+content-type: application/json
+
+{
+  "name": "ustensile de cuisine"
+}
+
+### DELETE /category/:id
+DELETE {{url}}/category/3
+
+
+

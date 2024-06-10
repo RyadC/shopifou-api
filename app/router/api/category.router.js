@@ -1,10 +1,10 @@
 import { Router } from "express";
-import validationSchema from "../../schema/validation.schema.js";
+import validationSchema from "../../schema-validation/validation.schema.js";
 import catchHandlerController from "../../libraries/catchController.handler.js";
-import categoryShowSchema from "../../schema/category/category.show.schema.js";
-import categoryStoreSchema from "../../schema/category/category.store.schema.js";
-import categoryUpdateSchema from "../../schema/category/category.update.schema.js";
-import categoryDestroySchema from "../../schema/category/category.destroy.schema.js";
+import categoryShowSchema from "../../schema-validation/category/category.show.schema.js";
+import categoryStoreSchema from "../../schema-validation/category/category.store.schema.js";
+import categoryUpdateSchema from "../../schema-validation/category/category.update.schema.js";
+import categoryDestroySchema from "../../schema-validation/category/category.destroy.schema.js";
 import categoryController from "../../controller/api/category.controller.js";
 
 

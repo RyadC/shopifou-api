@@ -1,0 +1,33 @@
+@url=http://{{$dotenv HOST}}:{{$dotenv PORT}}/api
+
+### GET /article 
+GET {{url}}/article
+
+### POST /article
+POST {{url}}/article
+content-type: application/json
+
+{
+  "barcode": "9475312045780",
+  "name": "lot de 3 colles",
+  "brand": "Mapped",
+  "price": 10.25
+} 
+
+### GET /article/:id
+GET {{url}}/article/9
+# GET {{url}}/article/3
+
+### PATCH /article/:id
+PATCH {{url}}/article/9
+content-type: application/json
+
+{
+  "brand": "chose"
+}
+
+### DELETE /article/:id
+DELETE {{url}}/article/3
+
+
+

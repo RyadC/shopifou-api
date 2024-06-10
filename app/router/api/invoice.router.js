@@ -4,13 +4,13 @@ import { Router } from 'express';
 // INTERNAL MODULES
 import invoiceController from '../../controller/api/invoice.controller.js';
 import catchHandlerController from '../../libraries/catchController.handler.js';
-import validationSchema from '../../schema/validation.schema.js';
-import invoiceStoreSchema from '../../schema/invoice/invoice.store.schema.js';
-import invoiceIndexSchema from '../../schema/invoice/invoice.index.schema.js';
-import invoiceUpdateSchema from '../../schema/invoice/invoice.update.schema.js';
-import invoiceDestroySchema from '../../schema/invoice/invoice.destroy.schema.js';
-import invoiceShowSchema from '../../schema/invoice/invoice.show.schema.js';
-import invoiceShowCustomerSchema from '../../schema/invoice/invoice.showCustomer.schema.js';
+import validationSchema from '../../schema-validation/validation.schema.js';
+import invoiceStoreSchema from '../../schema-validation/invoice/invoice.store.schema.js';
+import invoiceIndexSchema from '../../schema-validation/invoice/invoice.index.schema.js';
+import invoiceUpdateSchema from '../../schema-validation/invoice/invoice.update.schema.js';
+import invoiceDestroySchema from '../../schema-validation/invoice/invoice.destroy.schema.js';
+import invoiceShowSchema from '../../schema-validation/invoice/invoice.show.schema.js';
+import invoiceShowCustomerSchema from '../../schema-validation/invoice/invoice.showCustomer.schema.js';
 
 
 const invoiceRouter = Router();

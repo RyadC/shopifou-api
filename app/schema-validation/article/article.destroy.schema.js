@@ -1,0 +1,13 @@
+import Joi from "joi";
+
+const articleDestroySchema = Joi.object({
+  id: Joi.number()
+    .min(1)
+    .positive()
+    .required()
+});
+
+
+
+
+export default articleDestroySchema;

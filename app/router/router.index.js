@@ -17,7 +17,6 @@ router.use('/api', apiRouter);
 // -> Handler error middleware
 router.use((error, req, res, next) => {
   let { message, status, name } = error;
-  // console.log(error);
   console.log(status, name, message);
   console.log(error);
 

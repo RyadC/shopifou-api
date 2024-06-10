@@ -28,10 +28,10 @@ const invoiceController = {
     const { total_value } = req.body;
     const id = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
 
-    const invoiceExist = await invoiceDatamapper.getOne(id);
+    const invoice = await invoiceDatamapper.getOne(id);
 
-    if(invoiceExist.length === 0) {
-      const requestError = new Error('Bad request. The provided id don\'t exist')
+    if(invoice.length === 0) {
+      const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
       requestError.name = 'BadRequest';
       return next(requestError);
     }

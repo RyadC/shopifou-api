@@ -1,6 +1,6 @@
 // INTERNA IMPORTS
 import orderDatamapper from "../../model/order.datamapper.js";
-
+import ApiError from "../../error/api.error.js";
 
 const orderController = {
 
@@ -17,7 +17,7 @@ const orderController = {
     const order = await orderDatamapper.getOne(id);
 
     if(order.length === 0) {
-      const requestError = new Error('Bad request. The provided id don\'t exist')
+      const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
       requestError.name = 'BadRequest';
       return next(requestError);
     }
@@ -40,7 +40,7 @@ const orderController = {
     const order = await orderDatamapper.getOne(id);
 
     if(order.length === 0) {
-      const requestError = new Error('Bad request. The provided id don\'t exist')
+      const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
       requestError.name = 'BadRequest';
       return next(requestError);
     }
@@ -55,7 +55,7 @@ const orderController = {
     const order = await orderDatamapper.getOne(id);
 
     if(order.length === 0) {
-      const requestError = new Error('Bad request. The provided id don\'t exist')
+      const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
       requestError.name = 'BadRequest';
       return next(requestError);
     }
@@ -65,22 +65,39 @@ const orderController = {
     res.status(204).json({});
   },
 
-  async showArticle(req, res) {
+  async showArticle(req, res, next) {
     // ? Implement route with subendpoints like this for getAll and subqueries ? 
     // const result = await orderDatamapper.getAll({endpoint: '/article', id})
     
     const articleId = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
+
+    // const article = await articleDatamapper.getOne(articleId);
+    const article = [];
+
+    if(article.length === 0) {
+      const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
+      requestError.name = 'BadRequest';
+      return next(requestError);
+    }
 
     const ordersByArticle = await orderDatamapper.getAllByArticle(articleId);
 
     res.status(200).json({ data: ordersByArticle});
   },
 
-  async showCustomer(req, res) {
+  async showCustomer(req, res, next) {
     // ? Implement route with subendpoints like this for getAll and subqueries ? 
     // const result = await orderDatamapper.getAll({endpoint: '/customer', id})
     
     const customerId = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
+
+    const customer = await articleDatamapper.getOne(articleId);
+
+    if(customer.length === 0) {
+      const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
+      requestError.name = 'BadRequest';
+      return next(requestError);
+    }
 
     const ordersByCustomer = await orderDatamapper.getAllByCustomer(customerId);
 

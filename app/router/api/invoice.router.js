@@ -29,8 +29,8 @@ invoiceRouter.route('/')
      * @tags Invoice
      * @param {PostInvoice} request.body.required - Invoice infos
      * @return {[GetInvoice]} 201 - Success response - application/json
-     * @return {Error} 400 - Bad request response - application/json
-     * @return {Error} 404 - Invoice not found - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Invoice not found - application/json
   */
   .post(validationSchema(invoiceStoreSchema, ['body']), invoiceController.store);
   
@@ -43,8 +43,8 @@ invoiceRouter.route('/:id(\\d+)')
      * @tags Invoice
      * @param {number} id.path.required - invoice ID to be returned
      * @return {[GetInvoice]} 200 - Success response - application/json
-     * @return {Error} 400 - Bad request response - application/json
-     * @return {Error} 404 - Invoice not found - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Invoice not found - application/json
   */
   .get(validationSchema(invoiceShowSchema, ['params']), invoiceController.show.bind(invoiceController))
 
@@ -55,8 +55,8 @@ invoiceRouter.route('/:id(\\d+)')
      * @param {number} id.path.required - invoice ID to be updated
      * @param {PatchInvoice} request.body.required - Invoice infos
      * @return {[GetInvoice]} 200 - Success response - application/json
-     * @return {Error} 400 - Bad request response - application/json
-     * @return {Error} 404 - Invoice not found - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Invoice not found - application/json
   */
   .patch(validationSchema(invoiceUpdateSchema, ['body','params']), invoiceController.update.bind(invoiceController))
 
@@ -66,8 +66,8 @@ invoiceRouter.route('/:id(\\d+)')
      * @tags Invoice
      * @param {number} id.path.required - invoice ID to be deleted
      * @return {object} 200 - Success response - application/json
-     * @return {Error} 400 - Bad request response - application/json
-     * @return {Error} 404 - Invoice not found - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Invoice not found - application/json
   */
   .delete(validationSchema(invoiceDestroySchema, ['params']), invoiceController.destroy.bind(invoiceController));
 

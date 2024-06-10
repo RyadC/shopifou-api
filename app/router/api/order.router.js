@@ -23,8 +23,8 @@ orderRouter.route('/')
    * @tags Order
    * @param {PostOrder} request.body.required - Order infos
    * @return {[GetOrder]} 200 - Success response - application/json
-   * @return {Error} 400 - Bad request response - application/json
-   * @return {Error} 404 - Order not found - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - Order not found - application/json
    */
   .post(catchHandlerController(orderController.store));
 
@@ -46,8 +46,8 @@ orderRouter.route('/:id(\\d+)')
    * @param {number} id.path.required - Order ID tço be updated
    * @param {PatchOrder} request.body.required - Order infos
    * @return {[GetOrder]} 200 - Success response - application/json
-   * @return {Error} 400 - Bad request response - application/json
-   * @return {Error} 404 - Order not found - application/json
+   * @return {ApiError} 400 - Bad request response - application/json
+   * @return {ApiError} 404 - Order not found - application/json
    */
   .patch(catchHandlerController(orderController.update.bind(orderController)))
 
@@ -57,8 +57,8 @@ orderRouter.route('/:id(\\d+)')
      * @tags Order
      * @param {number} id.path.required - Order ID to be deleted
      * @return {object} 200 - Success response - application/json
-     * @return {Error} 400 - Bad request response - application/json
-     * @return {Error} 404 - Invoice not found - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Invoice not found - application/json
   */
   .delete(catchHandlerController(orderController.destroy.bind(orderController)));
 
@@ -71,8 +71,8 @@ orderRouter.route('/article/:id(\\d+)')
      * @tags Order
      * @param {number} id.path.required - Article ID to show their order
      * @return {[GetOrderByArticle]} 200 - Success response - application/json
-     * @return {Error} 400 - Bad request response - application/json
-     * @return {Error} 404 - Invoice not found - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Invoice not found - application/json
   */
   .get(catchHandlerController(orderController.showArticle.bind(orderController)));
 
@@ -84,8 +84,8 @@ orderRouter.route('/customer/:id(\\d+)')
      * @tags Order
      * @param {number} id.path.required - Customer ID to show their order 
      * @return {[GetOrderByCustomer]} 200 - Success response - application/json
-     * @return {Error} 400 - Bad request response - application/json
-     * @return {Error} 404 - Invoice not found - application/json
+     * @return {ApiError} 400 - Bad request response - application/json
+     * @return {ApiError} 404 - Invoice not found - application/json
   */
   .get(catchHandlerController(orderController.showCustomer.bind(orderController)));
 

@@ -1,6 +1,7 @@
 // INTERNA IMPORTS
 import orderDatamapper from "../../model/order.datamapper.js";
 import ApiError from "../../error/api.error.js";
+import articleDatamapper from "../../model/article.datamapper.js";
 
 const orderController = {
 
@@ -71,8 +72,7 @@ const orderController = {
     
     const articleId = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
 
-    // const article = await articleDatamapper.getOne(articleId);
-    const article = [];
+    const article = await articleDatamapper.getOne(articleId);
 
     if(article.length === 0) {
       const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
@@ -91,7 +91,8 @@ const orderController = {
     
     const customerId = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
 
-    const customer = await articleDatamapper.getOne(articleId);
+    // const customer = await customerDatamapper.getOne(articleId);
+    const customer = [];
 
     if(customer.length === 0) {
       const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});

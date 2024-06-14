@@ -8,20 +8,21 @@ POST {{url}}/order
 content-type: application/json
 
 {
-  "reference": "OR_0005",
+  "reference": "OR_0007",
   "value": 50.48,
-  "customer_id": 10
+  "customer_id": 1
 } 
 
 ### GET /order/:id
 GET {{url}}/order/1
 
-### PATCH /order/:id
+
+### PATCH /order/:id  ! La précision n'est pas validée ! A corriger
 PATCH {{url}}/order/1
 content-type: application/json
 
 {
-  "value": 45
+  "value": 10.298555 
 } 
 
 ### DELETE /order/:id

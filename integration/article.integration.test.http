@@ -29,5 +29,7 @@ content-type: application/json
 ### DELETE /article/:id
 DELETE {{url}}/article/3
 
+### GET /article/category/:id
+GET {{url}}/article/category/2
 
 

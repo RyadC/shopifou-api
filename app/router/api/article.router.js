@@ -69,4 +69,8 @@ articleRouter.route('/:id(\\d+)')
   .delete(validationSchema(articleDestroySchema, ['params']), catchHandlerController(articleController.destroy.bind(articleController)));
 
 
+articleRouter.route('/category/:id(\\d+)')
+
+   .get(articleController.showByCategory.bind(articleController))
+
   export default articleRouter;

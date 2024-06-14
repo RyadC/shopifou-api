@@ -8,6 +8,18 @@ const articleDatamapper = {
     return result.rows; 
   },
 
+  async getAllByCategory(categoryId) {
+    const result = await client.query(`
+      SELECT * FROM "article" 
+        JOIN "article_has_category" 
+          ON "article"."article_id" = "article_has_category"."article_id"
+        WHERE "category_id" = $1
+      ;
+      `, [categoryId]);
+
+    return result.rows;
+  },
+
   async getOne(id) {
     const result = await client.query(`
     SELECT * FROM "article"

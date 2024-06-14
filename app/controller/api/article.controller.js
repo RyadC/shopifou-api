@@ -1,5 +1,6 @@
 import ApiError from "../../error/api.error.js";
 import articleDatamapper from "../../model/article.datamapper.js";
+import client from "../../config/pg.client.js";
 
 const articleController = {
   RADIX_PARSEINT: 10,
@@ -21,6 +22,14 @@ const articleController = {
     }
 
     res.status(200).json({data: article});
+  },
+
+  async showByCategory(req, res) {
+    const categoryId = Number.parseInt(req.params.id, this.RADIX_PARSEINT)
+
+    const articleByCategory = await articleDatamapper.getAllByCategory(categoryId);
+
+    res.status(200).json({data: articleByCategory});
   },
 
   async store(req, res) {

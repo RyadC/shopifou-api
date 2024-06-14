@@ -7,14 +7,17 @@ const invoiceStoreSchema = Joi.object({
 
     total_value: Joi.number()
       .precision(2)
+      .min(0.01) // Une facture doit être positive, les gifts sont seulment si une vente est effectuée
       .required(),
     
-    customer_id: Joi.any()
-      .id()
+    customer_id: Joi.number()
+      .min(1)
+      .positive()
       .required(),
 
-    order_id: Joi.any()
-      .id()
+    order_id: Joi.number()
+      .min(1)
+      .positive()
       .required(),
 });
 

@@ -11,6 +11,8 @@ import invoiceUpdateSchema from '../../schema-validation/invoice/invoice.update.
 import invoiceDestroySchema from '../../schema-validation/invoice/invoice.destroy.schema.js';
 import invoiceShowSchema from '../../schema-validation/invoice/invoice.show.schema.js';
 import invoiceShowCustomerSchema from '../../schema-validation/invoice/invoice.showCustomer.schema.js';
+import updateSchema from '../../schema-validation/update.schema.js';
+import paramIdSchema from '../../schema-validation/paramId.schema.js';
 
 
 const invoiceRouter = Router();
@@ -22,7 +24,7 @@ invoiceRouter.route('/')
      * @tags Invoice
      * @return {[GetInvoice]} 200 - Success response - application/json
   */
-  .get(validationSchema(invoiceIndexSchema, ['params']), catchHandlerController(invoiceController.index))
+  .get(catchHandlerController(invoiceController.index))
 
   /**
      * POST /api/invoice
@@ -59,7 +61,7 @@ invoiceRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Invoice not found - application/json
   */
-  .patch(validationSchema(invoiceUpdateSchema, ['body','params']), invoiceController.update.bind(invoiceController))
+  .patch(validationSchema(updateSchema(paramIdSchema, invoiceUpdateSchema), ['body','params'], 'update'), invoiceController.update.bind(invoiceController))
 
   /**
      * DELETE /api/invoice/{id}

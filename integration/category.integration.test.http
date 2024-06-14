@@ -16,7 +16,7 @@ GET {{url}}/category/2
 GET {{url}}/category/3
 
 ### PATCH /category/:id
-PATCH {{url}}/category/3
+PATCH {{url}}/category/4
 content-type: application/json
 
 {

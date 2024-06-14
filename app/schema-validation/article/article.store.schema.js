@@ -19,7 +19,7 @@ const articleStoreSchema = Joi.object({
   price: Joi.number()
     .precision(2)
     .positive()
-    .min(0.01)
+    // .min(0.01) // ? Ne pourrait-on pas avoir d'article à 0€ en gift ?
     .required()
 });
 

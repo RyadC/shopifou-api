@@ -6,6 +6,8 @@ import categoryStoreSchema from "../../schema-validation/category/category.store
 import categoryUpdateSchema from "../../schema-validation/category/category.update.schema.js";
 import categoryDestroySchema from "../../schema-validation/category/category.destroy.schema.js";
 import categoryController from "../../controller/api/category.controller.js";
+import updateSchema from "../../schema-validation/update.schema.js";
+import paramIdSchema from "../../schema-validation/paramId.schema.js";
 
 
 const categoryRouter = Router();
@@ -52,7 +54,7 @@ categoryRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request - application/json
      * @return {ApiError} 404 - Category not found - application/json
   */
-  .patch(validationSchema(categoryUpdateSchema, ['params', 'body']), catchHandlerController(categoryController.update.bind(categoryController)))
+  .patch(validationSchema(updateSchema(paramIdSchema, categoryUpdateSchema), ['params', 'body'], 'update'), catchHandlerController(categoryController.update.bind(categoryController)))
 
   /**
      * DELETE /api/category/{id}

@@ -2,7 +2,7 @@
 import { Router } from 'express';
 
 // INTERNAL MODULES
-import invoiceController from '../../controller/api/invoice.controller.js';
+// import InvoiceController from '../../controller/api/invoice.controller.js';
 import catchHandlerController from '../../libraries/catchController.handler.js';
 import validationSchema from '../../schema-validation/validation.schema.js';
 import invoiceStoreSchema from '../../schema-validation/invoice/invoice.store.schema.js';
@@ -13,9 +13,15 @@ import invoiceShowSchema from '../../schema-validation/invoice/invoice.show.sche
 import invoiceShowCustomerSchema from '../../schema-validation/invoice/invoice.showCustomer.schema.js';
 import updateSchema from '../../schema-validation/update.schema.js';
 import paramIdSchema from '../../schema-validation/paramId.schema.js';
+import Controller from '../../controller/api/invoice.controller.js';
+import invoiceDatamapper from '../../model/invoice.datamapper.js';
 
 
 const invoiceRouter = Router();
+
+const InvoiceController = new Controller(invoiceDatamapper);
+
+console.log(InvoiceController);
 
 invoiceRouter.route('/')
   /**
@@ -24,7 +30,7 @@ invoiceRouter.route('/')
      * @tags Invoice
      * @return {[GetInvoice]} 200 - Success response - application/json
   */
-  .get(catchHandlerController(invoiceController.index))
+  .get(catchHandlerController(InvoiceController.index))
 
   /**
      * POST /api/invoice
@@ -35,7 +41,7 @@ invoiceRouter.route('/')
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Invoice not found - application/json
   */
-  .post(validationSchema(invoiceStoreSchema, ['body']), invoiceController.store);
+  .post(validationSchema(invoiceStoreSchema, ['body']), InvoiceController.store);
   
 
 invoiceRouter.route('/:id(\\d+)')
@@ -49,7 +55,7 @@ invoiceRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Invoice not found - application/json
   */
-  .get(validationSchema(invoiceShowSchema, ['params']), invoiceController.show.bind(invoiceController))
+  .get(validationSchema(invoiceShowSchema, ['params']), InvoiceController.show.bind(InvoiceController))
 
   /**
      * PATCH /api/invoice/{id}
@@ -61,7 +67,7 @@ invoiceRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Invoice not found - application/json
   */
-  .patch(validationSchema(updateSchema(paramIdSchema, invoiceUpdateSchema), ['body','params'], 'update'), invoiceController.update.bind(invoiceController))
+//   .patch(validationSchema(updateSchema(paramIdSchema, invoiceUpdateSchema), ['body','params'], 'update'), InvoiceController.update.bind(InvoiceController))
 
   /**
      * DELETE /api/invoice/{id}
@@ -72,7 +78,7 @@ invoiceRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Invoice not found - application/json
   */
-  .delete(validationSchema(invoiceDestroySchema, ['params']), invoiceController.destroy.bind(invoiceController));
+  .delete(validationSchema(invoiceDestroySchema, ['params']), InvoiceController.destroy.bind(InvoiceController));
 
 invoiceRouter.route('/customer/:id(\\d+)')
    /**
@@ -84,6 +90,6 @@ invoiceRouter.route('/customer/:id(\\d+)')
     * @return {ApiError} 400 - Bad request - application/json
     * @return {ApiError} 404 - Customer not found - application/json
     */
-   .get(validationSchema(invoiceShowCustomerSchema, ['params']), catchHandlerController(invoiceController.showCustomer.bind(invoiceController)))
+   // .get(validationSchema(invoiceShowCustomerSchema, ['params']), catchHandlerController(InvoiceController.showCustomer.bind(InvoiceController)))
 
 export default invoiceRouter;

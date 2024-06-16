@@ -67,23 +67,31 @@ import CoreController from "./core.controller.js";
 //   }
 // };
 
-// -> We make a Singleton class
+// -> We make a Singleton class for each instance with a new datamapper. So it is not possible to instantiate two classes with the same datamapper
 class Controller extends CoreController {
-  #instance = null
-  // datamapper = null
+  static instances = [];
+  static datamapper;
 
   constructor(datamapper) {
     super();
-    this.datamapper = datamapper;
 
-    if(!this.#instance) {
-      this.#instance = this;
+    const findedInstance = Controller.instances.find(item => item.datamapper === datamapper);
+
+    if(findedInstance) {
+      return findedInstance.instance;
+    } else {
+      this.datamapper = datamapper;
+      Controller.instances.push({
+        instance: this,
+        datamapper: this.datamappertamapper
+      });
+      return Controller.instances.at(-1).instance;
     }
-    return this.#instance;
   }
 
-
 }
+
+
 
 export default Controller;
 

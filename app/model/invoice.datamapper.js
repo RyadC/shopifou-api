@@ -40,7 +40,7 @@ const invoiceDatamapper = {
     return result.rows;
   },
 
-  async update(id, totalValue) {
+  async update(id, { total_value: totalValue }) {
     const result = await client.query(`
       UPDATE "invoice"
         SET 

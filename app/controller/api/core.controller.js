@@ -30,7 +30,38 @@ class CoreController {
     res.status(204).json({});
   }
 
-  // update
+  update = async (req, res, next) => {
+    const requestData = req.body;
+    const id = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
+
+    const data = await this.datamapper.getOne(id);
+
+    if(data.length === 0) {
+      const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
+      requestError.name = 'BadRequest';
+      return next(requestError);
+    }
+
+    const updatedData = await this.datamapper.update(id, requestData);
+
+    res.status(200).json({data: updatedData});
+  }
+
+  test = (endpoint) => async (req, res, next) => {
+    const endpointId = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
+    const findedEndpoint = [1]; // implémenter la récupération du endpoint pour vérifier si le id est bien en bdd
+    
+    if(findedEndpoint.length === 0) {
+      const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
+      requestError.name = 'BadRequest';
+      return next(requestError);
+    }
+
+    const dataEndpoint = await this.datamapper[`getAllBy${endpoint}`](endpointId);
+    console.log('dans le test');
+    res.status(200).json({data: dataEndpoint});
+  }
+
 
   // other shows
 

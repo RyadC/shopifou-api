@@ -22,7 +22,7 @@ PATCH {{url}}/invoice/1
 content-type: application/json
 
 {
-  "total_value": 3.25
+  "total_value": 13.25
 } 
 
 ### DELETE /invoice/:id

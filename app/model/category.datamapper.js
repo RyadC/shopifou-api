@@ -31,7 +31,7 @@ const categoryDatamapper = {
     return result.rows;
   },
 
-  async update(id, name) {
+  async update(id, { name }) {
     const result = await client.query(`
     UPDATE "category"
       SET

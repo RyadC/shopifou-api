@@ -8,7 +8,7 @@ POST {{url}}/invoice
 content-type: application/json
 
 {
-  "reference": "INV_0098",
+  "reference": "INV_0099",
   "total_value": 178.48,
   "customer_id": 1,
   "order_id": 4

@@ -1,0 +1,30 @@
+@url=http://{{$dotenv HOST}}:{{$dotenv PORT}}/api
+
+### GET /customer 
+GET {{url}}/customer
+ 
+### POST /customer
+POST {{url}}/customer
+content-type: application/json
+
+{
+  "name": "Madame",
+  "address": "104 chemin de la fonction",
+  "phone": "0475987596",
+  "email": "madame@email.email"
+} 
+
+### GET /customer/:id
+GET {{url}}/customer/2
+
+
+### PATCH /customer/:id  ! La précision n'est pas validée ! A corriger
+PATCH {{url}}/customer/2
+content-type: application/json
+
+{
+  "name": "Cacahuète" 
+} 
+
+### DELETE /customer/:id
+DELETE {{url}}/customer/3

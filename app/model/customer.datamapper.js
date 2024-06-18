@@ -38,9 +38,9 @@ const customerDatamapper = {
         "name" = COALESCE($1, "name"),
         "address" = COALESCE($2, "address"),
         "phone" = COALESCE($3, "phone"),
-        "email" = COALESCE($3, "email"),
+        "email" = COALESCE($4, "email"),
         "updated_at" = now()
-      WHERE "customer_id" = $4
+      WHERE "customer_id" = $5
     RETURNING *
     ;
     `, [name, address, phone, email, id]);

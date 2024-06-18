@@ -8,7 +8,7 @@ POST {{url}}/order
 content-type: application/json
 
 {
-  "reference": "OR_0077",
+  "reference": "OR_0078",
   "value": 104.48,
   "customer_id": 2
 } 
@@ -22,7 +22,7 @@ PATCH {{url}}/order/2
 content-type: application/json
 
 {
-  "value": 10.298555 
+  "value": 10.87 
 } 
 
 ### DELETE /order/:id

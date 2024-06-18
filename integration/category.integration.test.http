@@ -8,7 +8,7 @@ POST {{url}}/category
 content-type: application/json
 
 {
-  "name": "jouets pour animaux"
+  "name": "jeu d'extérieur"
 } 
 
 ### GET /category/:id
@@ -16,7 +16,7 @@ GET {{url}}/category/2
 # GET {{url}}/category/3
 
 ### PATCH /category/:id
-PATCH {{url}}/category/4
+PATCH {{url}}/category/1
 content-type: application/json
 
 {

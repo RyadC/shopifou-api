@@ -2,20 +2,16 @@ import Joi from "joi";
 
 const customerUpdateSchema = Joi.object({
   name: Joi.string()
-    .min(2)
-    .required(),
+    .min(2),
 
   address: Joi.string()
-    .min(2)
-    .required(),
+    .min(2),
 
   phone: Joi.string()
-    .length(10)
-    .required(),
+    .length(10),
 
   email: Joi.string()
     .email()
-    .required(),
 })
 .min(1)
 .max(4)

@@ -1,17 +1,27 @@
+// EXTERNAL MODULES
 import { Router } from "express";
+
+// INTERNAL MODULES
+   // Controller
+import Controller from "../../controller/api/controller.js";
+   // Datamapper
+import articleDatamapper from "../../model/article.datamapper.js";
+   // Errors handler
 import catchHandlerController from "../../libraries/catchController.handler.js";
-import articleController from "../../controller/api/article.controller.js";
-import articleStoreSchema from "../../schema-validation/article/article.store.schema.js";
-import articleShowSchema from "../../schema-validation/article/article.show.schema.js";
-import articleUpdateSchema from "../../schema-validation/article/article.upadte.schema.js";
-import articleDestroySchema from "../../schema-validation/article/article.destroy.schema.js";
+   // Schemas 
 import validationSchema from "../../schema-validation/validation.schema.js";
 import updateSchema from "../../schema-validation/update.schema.js";
 import paramIdSchema from "../../schema-validation/paramId.schema.js";
+import articleShowSchema from "../../schema-validation/article/article.show.schema.js";
+import articleStoreSchema from "../../schema-validation/article/article.store.schema.js";
+import articleUpdateSchema from "../../schema-validation/article/article.upadte.schema.js";
+import articleDestroySchema from "../../schema-validation/article/article.destroy.schema.js";
 
-
+/* --------------------------------------------------------------------------- */
 
 const articleRouter = Router();
+
+const ArticleController = new Controller(articleDatamapper);
 
 articleRouter.route('/')
   /**
@@ -20,7 +30,7 @@ articleRouter.route('/')
      * @tags Article
      * @return {[GetArticle]} 200 - Success response - application/json
   */
-  .get(catchHandlerController(articleController.index))
+  .get(catchHandlerController(ArticleController.index))
 
   /**
      * POST /api/article/
@@ -31,7 +41,7 @@ articleRouter.route('/')
      * @return {ApiError} 400 - Bad request - application/json
      * @return {ApiError} 404 - Article not found - application/json
   */
-  .post(validationSchema(articleStoreSchema, ['body']), catchHandlerController(articleController.store))
+  .post(validationSchema(articleStoreSchema, ['body']), catchHandlerController(ArticleController.store))
 
 articleRouter.route('/:id(\\d+)')
   /**
@@ -43,7 +53,7 @@ articleRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request - application/json
      * @return {ApiError} 404 - Article not found - application/json
   */
-  .get(validationSchema(articleShowSchema, ['params']), catchHandlerController(articleController.show.bind(articleController)))
+  .get(validationSchema(articleShowSchema, ['params']), catchHandlerController(ArticleController.show))
 
   /**
      * PATCH /api/article/{id}
@@ -55,7 +65,7 @@ articleRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request - application/json
      * @return {ApiError} 404 - Article not found - application/json
   */
-  .patch(validationSchema(updateSchema(paramIdSchema, articleUpdateSchema), ['params', 'body'], 'update'), catchHandlerController(articleController.update.bind(articleController)))
+  .patch(validationSchema(updateSchema(paramIdSchema, articleUpdateSchema), ['params', 'body'], 'update'), catchHandlerController(ArticleController.update))
 
   /**
      * DELETE /api/article/{id}
@@ -66,11 +76,11 @@ articleRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request - application/json
      * @return {ApiError} 404 - Article not found - application/json
   */
-  .delete(validationSchema(articleDestroySchema, ['params']), catchHandlerController(articleController.destroy.bind(articleController)));
+  .delete(validationSchema(articleDestroySchema, ['params']), catchHandlerController(ArticleController.destroy));
 
 
 articleRouter.route('/category/:id(\\d+)')
 
-   .get(articleController.showByCategory.bind(articleController))
+   .get(ArticleController.show('Category'))
 
   export default articleRouter;

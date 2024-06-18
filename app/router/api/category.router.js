@@ -1,16 +1,26 @@
+// EXTERNAL MODULES
 import { Router } from "express";
-import validationSchema from "../../schema-validation/validation.schema.js";
+// INTERNAL MODULES
+   // Controller
+import Controller from "../../controller/api/controller.js";
+   // Datamapper
+import categoryDatamapper from "../../model/category.datamapper.js";
+   // Errors handler
 import catchHandlerController from "../../libraries/catchController.handler.js";
+   // Schemas 
+import validationSchema from "../../schema-validation/validation.schema.js";
+import paramIdSchema from "../../schema-validation/paramId.schema.js";
+import updateSchema from "../../schema-validation/update.schema.js";
 import categoryShowSchema from "../../schema-validation/category/category.show.schema.js";
 import categoryStoreSchema from "../../schema-validation/category/category.store.schema.js";
 import categoryUpdateSchema from "../../schema-validation/category/category.update.schema.js";
 import categoryDestroySchema from "../../schema-validation/category/category.destroy.schema.js";
-import categoryController from "../../controller/api/category.controller.js";
-import updateSchema from "../../schema-validation/update.schema.js";
-import paramIdSchema from "../../schema-validation/paramId.schema.js";
 
+/* --------------------------------------------------------------------------- */
 
 const categoryRouter = Router();
+
+const CategoryController = new Controller(categoryDatamapper);
 
 categoryRouter.route('/')
   /**
@@ -19,7 +29,7 @@ categoryRouter.route('/')
      * @tags Category
      * @return {[GetCategory]} 200 - Success response - application/json
   */
-  .get(catchHandlerController(categoryController.index))
+  .get(catchHandlerController(CategoryController.index))
 
   /**
      * POST /api/category/
@@ -30,7 +40,7 @@ categoryRouter.route('/')
      * @return {ApiError} 400 - Bad request - application/json
      * @return {ApiError} 404 - Category not found - application/json
   */
-  .post(validationSchema(categoryStoreSchema, ['body']), catchHandlerController(categoryController.store))
+  .post(validationSchema(categoryStoreSchema, ['body']), catchHandlerController(CategoryController.store))
 
 categoryRouter.route('/:id(\\d+)')
   /**
@@ -42,7 +52,7 @@ categoryRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request - application/json
      * @return {ApiError} 404 - Category not found - application/json
   */
-  .get(validationSchema(categoryShowSchema, ['params']), catchHandlerController(categoryController.show.bind(categoryController)))
+  .get(validationSchema(categoryShowSchema, ['params']), catchHandlerController(CategoryController.show()))
 
   /**
      * PATCH /api/category/{id}
@@ -54,7 +64,7 @@ categoryRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request - application/json
      * @return {ApiError} 404 - Category not found - application/json
   */
-  .patch(validationSchema(updateSchema(paramIdSchema, categoryUpdateSchema), ['params', 'body'], 'update'), catchHandlerController(categoryController.update.bind(categoryController)))
+  .patch(validationSchema(updateSchema(paramIdSchema, categoryUpdateSchema), ['params', 'body'], 'update'), catchHandlerController(CategoryController.update))
 
   /**
      * DELETE /api/category/{id}
@@ -65,7 +75,7 @@ categoryRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request - application/json
      * @return {ApiError} 404 - Category not found - application/json
   */
-  .delete(validationSchema(categoryDestroySchema, ['params']), catchHandlerController(categoryController.destroy.bind(categoryController)));
+  .delete(validationSchema(categoryDestroySchema, ['params']), catchHandlerController(CategoryController.destroy));
 
 
   export default categoryRouter;

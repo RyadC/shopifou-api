@@ -51,12 +51,13 @@ class CoreController {
   show = (endpoint) => async (req, res, next) => {
     console.log('show');
     const id = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
-    const endpointString = endpoint.toLowerCase();
-
+    
     if(endpoint) {
+      const endpointString = endpoint.toLowerCase();
       const endpointDatamapper = await import(`../../model/${endpointString}.datamapper.js`)
         .then(importDatamapper => importDatamapper.default)
 
+        console.log(endpointDatamapper);
       const findedEndpointData = await endpointDatamapper.getOne(id);
 
       if(findedEndpointData.length === 0) {
@@ -74,8 +75,6 @@ class CoreController {
 
     res.status(200).json({data: data});
   }
-
-
 
 }
 

@@ -8,17 +8,17 @@ POST {{url}}/order
 content-type: application/json
 
 {
-  "reference": "OR_0007",
-  "value": 50.48,
-  "customer_id": 1
+  "reference": "OR_0077",
+  "value": 104.48,
+  "customer_id": 2
 } 
 
 ### GET /order/:id
-GET {{url}}/order/1
+GET {{url}}/order/2
 
 
 ### PATCH /order/:id  ! La précision n'est pas validée ! A corriger
-PATCH {{url}}/order/1
+PATCH {{url}}/order/2
 content-type: application/json
 
 {

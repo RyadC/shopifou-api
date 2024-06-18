@@ -3,22 +3,20 @@ import { Router } from 'express';
 
 // INTERNAL MODULES
    // Controller
-import Controller from '../../controller/api/invoice.controller.js';
+import Controller from '../../controller/api/controller.js';
    // Datamapper
 import invoiceDatamapper from '../../model/invoice.datamapper.js';
    // Errors handler
 import catchHandlerController from '../../libraries/catchController.handler.js';
    // Schemas 
 import validationSchema from '../../schema-validation/validation.schema.js';
-import invoiceStoreSchema from '../../schema-validation/invoice/invoice.store.schema.js';
-import invoiceIndexSchema from '../../schema-validation/invoice/invoice.index.schema.js';
-import invoiceUpdateSchema from '../../schema-validation/invoice/invoice.update.schema.js';
-import invoiceDestroySchema from '../../schema-validation/invoice/invoice.destroy.schema.js';
-import invoiceShowSchema from '../../schema-validation/invoice/invoice.show.schema.js';
-import invoiceShowCustomerSchema from '../../schema-validation/invoice/invoice.showCustomer.schema.js';
 import updateSchema from '../../schema-validation/update.schema.js';
 import paramIdSchema from '../../schema-validation/paramId.schema.js';
-import orderDatamapper from '../../model/order.datamapper.js';
+import invoiceShowSchema from '../../schema-validation/invoice/invoice.show.schema.js';
+import invoiceStoreSchema from '../../schema-validation/invoice/invoice.store.schema.js';
+import invoiceUpdateSchema from '../../schema-validation/invoice/invoice.update.schema.js';
+import invoiceDestroySchema from '../../schema-validation/invoice/invoice.destroy.schema.js';
+import invoiceShowCustomerSchema from '../../schema-validation/invoice/invoice.showCustomer.schema.js';
 
 /* --------------------------------------------------------------------------- */
 
@@ -59,7 +57,7 @@ invoiceRouter.route('/:id(\\d+)')
      * @return {ApiError} 400 - Bad request response - application/json
      * @return {ApiError} 404 - Invoice not found - application/json
   */
-  .get(validationSchema(invoiceShowSchema, ['params']), InvoiceController.show)
+  .get(validationSchema(invoiceShowSchema, ['params']), InvoiceController.show())
 
   /**
      * PATCH /api/invoice/{id}

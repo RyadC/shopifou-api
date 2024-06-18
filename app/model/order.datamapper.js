@@ -1,7 +1,7 @@
 import client from "../config/pg.client.js";
 
 
-export default {
+const orderDatamapper = {
   async getAll() {
     const result = await client.query(`SELECT * FROM "order";`);
 
@@ -30,6 +30,7 @@ export default {
   },
 
   async getOne(id) {
+    console.log('order, getOne');
     const result = await client.query(`
     SELECT * FROM "order"
       WHERE "order_id" = $1
@@ -52,7 +53,7 @@ export default {
     return result.rows;
   },
 
-  async update(id, value) {
+  async update(id, { value }) {
     const result = await client.query(`
     UPDATE "order"
       SET
@@ -78,4 +79,4 @@ export default {
 
 };
 
-// export default orderDatamapper;
+export default orderDatamapper;

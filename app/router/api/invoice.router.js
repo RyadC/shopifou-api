@@ -94,6 +94,6 @@ invoiceRouter.route('/customer/:id(\\d+)')
     * @return {ApiError} 400 - Bad request - application/json
     * @return {ApiError} 404 - Customer not found - application/json
     */
-   .get(validationSchema(invoiceShowCustomerSchema, ['params']), catchHandlerController(InvoiceController.test('Customer')))
+   .get(validationSchema(invoiceShowCustomerSchema, ['params']), InvoiceController.show('Customer'))
 
 export default invoiceRouter;

@@ -9,12 +9,12 @@ class CoreController {
     res.status(200).json({data: data});
   }
 
-  show = async (req, res) => {
-    const id = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
-    const data = await this.datamapper.getOne(id);
+  // show = async (req, res) => {
+  //   const id = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
+  //   const data = await this.datamapper.getOne(id);
 
-    res.status(200).json({data: data});
-  }
+  //   res.status(200).json({data: data});
+  // }
 
   store = async (req, res) => {
     const requestData = req.body;
@@ -47,23 +47,35 @@ class CoreController {
     res.status(200).json({data: updatedData});
   }
 
-  test = (endpoint) => async (req, res, next) => {
-    const endpointId = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
-    const findedEndpoint = [1]; // implémenter la récupération du endpoint pour vérifier si le id est bien en bdd
-    
-    if(findedEndpoint.length === 0) {
-      const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
-      requestError.name = 'BadRequest';
-      return next(requestError);
+  // Basic show and others show with join: invoice/customer
+  show = (endpoint) => async (req, res, next) => {
+    console.log('show');
+    const id = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
+    const endpointString = endpoint.toLowerCase();
+
+    if(endpoint) {
+      const endpointDatamapper = await import(`../../model/${endpointString}.datamapper.js`)
+        .then(importDatamapper => importDatamapper.default)
+
+      const findedEndpointData = await endpointDatamapper.getOne(id);
+
+      if(findedEndpointData.length === 0) {
+        const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
+        requestError.name = 'BadRequest';
+        return next(requestError);
+      }
+
+      const data = await this.datamapper[`getAllBy${endpoint}`](id);
+
+      return res.status(200).json({data: data});
     }
 
-    const dataEndpoint = await this.datamapper[`getAllBy${endpoint}`](endpointId);
-    console.log('dans le test');
-    res.status(200).json({data: dataEndpoint});
+    const data = await this.datamapper.getOne(id);
+
+    res.status(200).json({data: data});
   }
 
 
-  // other shows
 
 }
 

@@ -16,6 +16,15 @@ const invoiceDatamapper = {
 
     return result.rows;  
   },
+  
+  async getAllByOrder(orderId) {
+    const result = await client.query(`
+      SELECT * FROM "invoice"
+        WHERE "order_id" = $1
+      ;`, [orderId]);
+
+    return result.rows;  
+  },
 
   async getOne(id) {
     const result = await client.query(`

@@ -30,19 +30,43 @@ articleRouter.route('/')
      * @tags Article
      * @return {array<GetArticle>} 200 - Success response - application/json
      * @example response - 200 - example success response
-     *{
-     *   "data": [
-     *     {
-     *       "article_id": 9,
-     *       "barcode": "9475312045780",
-     *       "name": "slippers",
-     *       "brand": "home",
-     *       "price": "10.25",
-     *       "created_at": "2024-06-10T14:54:41.701Z",
-     *       "updated_at": "2024-06-18T12:54:43.318Z"
-     *     }
-     *   ]
-     *}
+      *{
+      *  "data": [
+      *    {
+      *      "article_id": 1,
+      *      "barcode": "57954884154",
+      *      "name": "stylo rouge XR collection",
+      *      "brand": "Maped",
+      *      "price": "2.63",
+      *      "created_at": "2024-06-02T06:33:57.160Z",
+      *      "updated_at": null,
+      *      "item_id": 1,
+      *      "category_id": 2
+      *    },
+      *    {
+      *      "article_id": 3,
+      *      "barcode": "57954899644",
+      *      "name": "céréale pétale croquant",
+      *      "brand": "Frosties",
+      *      "price": "5.65",
+      *      "created_at": "2024-06-14T14:43:41.613Z",
+      *      "updated_at": null,
+      *      "item_id": 3,
+      *      "category_id": 2
+      *    },
+      *    {
+      *      "article_id": 4,
+      *      "barcode": "574584189964",
+      *      "name": "confiture de fraise",
+      *      "brand": "Belle maman",
+      *      "price": "3.02",
+      *      "created_at": "2024-06-14T14:43:41.613Z",
+      *      "updated_at": null,
+      *      "item_id": 4,
+      *      "category_id": 2
+      *    }
+      *  ]
+      *}
   */
   .get(catchHandlerController(ArticleController.index))
 

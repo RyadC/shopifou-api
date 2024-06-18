@@ -19,7 +19,7 @@ GET {{url}}/article/9
 # GET {{url}}/article/3
 
 ### PATCH /article/:id
-PATCH {{url}}/article/78
+PATCH {{url}}/article/9
 content-type: application/json
 
 {

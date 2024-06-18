@@ -25,13 +25,16 @@ class CoreController {
 
   destroy = async (req, res) => {
     const id = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
-    const data = await this.datamapper.delete(id);
-    
-    if(data.length === 0) {
+    const findedData = await this.datamapper.getOne(id);
+    console.log(findedData);
+
+    if(findedData.length === 0) {
       const requestError = new ApiError('Bad request. The provided id don\'t exist', {status: 404});
       requestError.name = 'BadRequest';
       return next(requestError);
     }
+
+    const data = await this.datamapper.delete(id);
 
     res.status(204).json({});
   }

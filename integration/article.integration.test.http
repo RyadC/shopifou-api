@@ -8,10 +8,10 @@ POST {{url}}/article
 content-type: application/json
 
 {
-  "barcode": "9475312045780",
-  "name": "lot de 3 colles",
+  "barcode": "9475312745450",
+  "name": "lot de 3 feutres",
   "brand": "Mapped",
-  "price": 10.25
+  "price": 100.25
 } 
 
 ### GET /article/:id
@@ -19,11 +19,11 @@ GET {{url}}/article/9
 # GET {{url}}/article/3
 
 ### PATCH /article/:id
-PATCH {{url}}/article/9
+PATCH {{url}}/article/78
 content-type: application/json
 
 {
-  "brand": "chose"
+  "brand": "nouvelle chose"
 }
 
 ### DELETE /article/:id

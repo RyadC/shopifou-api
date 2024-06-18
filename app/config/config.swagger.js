@@ -38,7 +38,9 @@ const options = {
   swaggerUiOptions: {},
   // multiple option in case you want more that one instance
   // multiple: true,
+
 };
+console.log(import.meta.dirname);
 
 export default (app) => expressJSDocSwagger(app)(options);
 

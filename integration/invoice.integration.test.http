@@ -8,9 +8,9 @@ POST {{url}}/invoice
 content-type: application/json
 
 {
-  "reference": "INV_0003",
-  "total_value": 50.48,
-  "customer_id": 2,
+  "reference": "INV_0098",
+  "total_value": 178.48,
+  "customer_id": 1,
   "order_id": 4
 } 
 
@@ -22,11 +22,11 @@ PATCH {{url}}/invoice/1
 content-type: application/json
 
 {
-  "total_value": 13.25
+  "total_value": 45.25
 } 
 
 ### DELETE /invoice/:id
-DELETE {{url}}/invoice/16
+DELETE {{url}}/invoice/20
 
 ### GET /invoice/customer/:id
 GET {{url}}/invoice/customer/2

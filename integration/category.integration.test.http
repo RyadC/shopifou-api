@@ -8,12 +8,12 @@ POST {{url}}/category
 content-type: application/json
 
 {
-  "name": "jouets pour enfants"
+  "name": "jouets pour animaux"
 } 
 
 ### GET /category/:id
 GET {{url}}/category/2
-GET {{url}}/category/3
+# GET {{url}}/category/3
 
 ### PATCH /category/:id
 PATCH {{url}}/category/4
@@ -24,7 +24,7 @@ content-type: application/json
 }
 
 ### DELETE /category/:id
-DELETE {{url}}/category/3
+DELETE {{url}}/category/4
 
 
 

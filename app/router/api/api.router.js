@@ -35,6 +35,6 @@ apiRouter.use('/article', articleRouter);
 /**
  * @route   GET /api/customer/... 
  */
-// apiRouter.use('/customer', customerRouter);
+apiRouter.use('/customer', customerRouter);
 
 export default apiRouter;

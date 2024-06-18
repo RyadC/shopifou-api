@@ -1,3 +1,4 @@
+import ApiError from "../../error/api.error.js";
 
 class CoreController {
   RADIX_PARSEINT= 10;
@@ -23,7 +24,7 @@ class CoreController {
     res.status(201).json({data: data});
   }
 
-  destroy = async (req, res) => {
+  destroy = async (req, res, next) => {
     const id = Number.parseInt(req.params.id, this.RADIX_PARSEINT);
     const findedData = await this.datamapper.getOne(id);
     console.log(findedData);

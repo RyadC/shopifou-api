@@ -1,0 +1,8 @@
+[core]
+	engine = pg
+	top_dir = app/migration
+	# plan_file = app/migration/sqitch.plan
+[engine "pg"]
+	target = db:engine:[//[user[:password]@][host][:port]/][dbname]
+	# registry = sqitch
+	# client = psql

@@ -1,0 +1,4 @@
+%syntax-version=1.0.0
+%project=shopifou
+
+01-change-pk-name 2024-06-19T08:41:08Z ,,, <ryad@RyadC> # change the name of th primary key for each table

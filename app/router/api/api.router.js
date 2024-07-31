@@ -7,34 +7,38 @@ import orderRouter from "./order.router.js";
 import categoryRouter from "./category.router.js";
 import articleRouter from "./article.router.js";
 import customerRouter from "./customer.route.js";
+import signinRouter from "./signin.router.js";
+import authenticationCheck from "../../middleware/authentication-check.middleware.js";
 
-
-
-const apiRouter = Router()
+const apiRouter = Router();
+/**
+ *
+ */
+apiRouter.use("/signin", signinRouter);
 
 /**
  * @route   GET /api/invoice/...
  */
-apiRouter.use('/invoice', invoiceRouter);
+apiRouter.use("/invoice", invoiceRouter);
 
 /**
  * @route   GET /api/order/...
  */
-apiRouter.use('/order', orderRouter);
+apiRouter.use("/order", authenticationCheck, orderRouter);
 
 /**
- * @route   GET /api/category/... 
+ * @route   GET /api/category/...
  */
-apiRouter.use('/category', categoryRouter);
+apiRouter.use("/category", authenticationCheck, categoryRouter);
 
 /**
- * @route   GET /api/article/... 
+ * @route   GET /api/article/...
  */
-apiRouter.use('/article', articleRouter);
+apiRouter.use("/article", authenticationCheck, articleRouter);
 
 /**
- * @route   GET /api/customer/... 
+ * @route   GET /api/customer/...
  */
-apiRouter.use('/customer', customerRouter);
+apiRouter.use("/customer", authenticationCheck, customerRouter);
 
 export default apiRouter;

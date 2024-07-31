@@ -22,6 +22,8 @@ import invoiceShowCustomerSchema from '../../schema-validation/invoice/invoice.s
 
 const invoiceRouter = Router();
 
+
+
 const InvoiceController = new Controller(invoiceDatamapper);
 
 
@@ -267,5 +269,7 @@ invoiceRouter.route('/customer/:id(\\d+)')
      * }
     */
    .get(validationSchema(invoiceShowCustomerSchema, ['params']), InvoiceController.show('Customer'))
+
+   console.log(InvoiceController);
 
 export default invoiceRouter;

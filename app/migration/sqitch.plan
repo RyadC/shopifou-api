@@ -2,3 +2,6 @@
 %project=shopifou
 
 01-change-pk-name 2024-06-19T08:41:08Z ,,, <ryad@RyadC> # change the name of th primary key for each table
+02-basics-checks-domains 2024-06-19T09:17:38Z ,,, <ryad@RyadC> # Add basics checks and domains
+03-change-value-column 2024-06-19T15:25:52Z ,,, <ryad@RyadC> # Change column value and total_value from order and invoice into total_price
+04-add-triggers-name-price 2024-06-19T15:30:19Z ,,, <ryad@RyadC> # Add triggers for check the name and the price format in place of check and domain to overcome the existing values

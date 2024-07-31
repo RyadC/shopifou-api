@@ -1,3 +1,7 @@
 {
-  "search-online.search-engine": "MDN"
+  "search-online.search-engine": "MDN",
+  "editor.tokenColorCustomizations": {
+    "comments": "",
+    "textMateRules": []
+  }
 }

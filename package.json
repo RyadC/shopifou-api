@@ -4,6 +4,9 @@
   "description": "",
   "main": "server.js",
   "type": "module",
+  "engines": {
+    "node": "20"
+  },
   "scripts": {
     "test": "wsl NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" npx jest",
     "db:structure": "wsl psql -U shopifou -d shopifou -h 192.168.2.102 -f app/data/create_tables.sql;",

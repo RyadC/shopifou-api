@@ -9,28 +9,37 @@ const invoiceDatamapper = {
   },
 
   async getAllByCustomer(customerId) {
-    const result = await client.query(`
+    const result = await client.query(
+      `
       SELECT * FROM "invoice"
         WHERE "customer_id" = $1
-      ;`, [customerId]);
+      ;`,
+      [customerId]
+    );
 
-    return result.rows;  
+    return result.rows;
   },
-  
+
   async getAllByOrder(orderId) {
-    const result = await client.query(`
+    const result = await client.query(
+      `
       SELECT * FROM "invoice"
         WHERE "order_id" = $1
-      ;`, [orderId]);
+      ;`,
+      [orderId]
+    );
 
-    return result.rows;  
+    return result.rows;
   },
 
   async getOne(id) {
-    const result = await client.query(`
+    const result = await client.query(
+      `
     SELECT * FROM "invoice"
-      WHERE "invoice_id" = $1
-    ;`, [id]);
+      WHERE "id" = $1
+    ;`,
+      [id]
+    );
 
     return result.rows;
   },
@@ -38,40 +47,49 @@ const invoiceDatamapper = {
   async create(data) {
     const { reference, total_value, customer_id, order_id } = data;
 
-    const result = await client.query(`
+    const result = await client.query(
+      `
       INSERT INTO "invoice" ("reference", "total_value", "customer_id", "order_id")
         VALUES 
         ($1, $2, $3, $4)
       RETURNING * 
       ;
-    `, [reference, total_value, customer_id, order_id]);
+    `,
+      [reference, total_value, customer_id, order_id]
+    );
 
     return result.rows;
   },
 
   async update(id, { total_value: totalValue }) {
-    const result = await client.query(`
+    const result = await client.query(
+      `
       UPDATE "invoice"
         SET 
           "total_value" = $1,
           "updated_at" = now()
-        WHERE "invoice_id" = $2
+        WHERE "id" = $2
       RETURNING *
       ;
-    `, [totalValue, id]);
+    `,
+      [totalValue, id]
+    );
 
     return result.rows;
   },
 
   async delete(id) {
-    const result = await client.query(`
+    const result = await client.query(
+      `
       DELETE FROM "invoice"
-        WHERE invoice_id = $1
+        WHERE id = $1
       ;
-    `, [id]);
+    `,
+      [id]
+    );
 
     return result.rows;
-  }
+  },
 };
 
 export default invoiceDatamapper;

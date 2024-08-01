@@ -12,7 +12,7 @@
     "db:structure": "wsl psql -U shopifou -d shopifou -h 192.168.2.102 -f app/data/create_tables.sql;",
     "db:seeding": "wsl psql -U shopifou -d shopifou -h 192.168.2.102 -f app/data/seeding.sql;",
     "start": "wsl NODE_ENV=production node .",
-    "dev": "wsl NODE_ENV=development && node --watch server.js"
+    "dev": "wsl NODE_ENV=production && node --watch server.js"
   },
   "keywords": [],
   "author": "",
